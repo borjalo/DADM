@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Quotation Shake</string>
+    <string name="random">Random quotations</string>
+    <string name="fav_quotes">Favourite quotations</string>
+    <string name="settings_bar">Settings</string>
+    <string name="about_bar">About</string>
+
+    <string name="get">Get quotations</string>
+    <string name="fav">Favourite quotations</string>
+    <string name="set">Settings</string>
+    <string name="about">About</string>
+    
+    <!-- About screen -->
+    <string name="info">Quotation Shake by\n\nBorja Alonso\n\nborjalonso95@gmail.com\n\n2019</string>
+    
+    <!-- Settings screen -->
+    <string name="text_view_name">Name that identifies the user</string>
+    <string name="edit_text_name">Insert your name</string>
+    <string name="text_view_language">Quotations will be received in the selected language</string>
+    <string name="text_view_request">Web requests will be performed using the selected HTTP method</string>
+    <string name="radio_button_get" translatable="false">GET</string>
+    <string name="radio_button_post" translatable="false">POST</string>
+
+    <!-- Favourite quotations screen -->
+    <string name="author_info_button">Author info</string>
+
+    <!-- Quotations screen -->
+    <string name="text_view_refresh">Hello %1s!\nPress Refresh to get a new quotation</string>
+    <string name="quotation">This is a sample quotation</string>
+    <string name="author">This is a sample author</string>
+</resources>

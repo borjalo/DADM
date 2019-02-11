@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quotation Shake</string>
+    <string name="about">Acerca de</string>
+    <string name="about_bar">Acerca de</string>
+    <string name="author">Esto es un autor de prueba</string>
+    <string name="author_info_button">Información del autor</string>
+    <string name="edit_text_name">Introduce tu nombre</string>
+    <string name="fav">Citas favoritas</string>
+    <string name="fav_quotes">Citas favoritas</string>
+    <string name="get">Obtener citas</string>
+    <string name="quotation">Esto es una cita de prueba</string>
+    <string name="random">Citas aleatorias</string>
+    <string name="set">Ajustes</string>
+    <string name="settings_bar">Ajustes</string>
+    <string name="text_view_language">Las citas serán recibidas en el lenguaje seleccionado</string>
+    <string name="text_view_name">Nombre que identifica al usuario</string>
+    <string name="info">Untranslatable</string>
+    <string name="text_view_refresh">¡Hola %1s!\nPulsa Refrescar para obtener una nueva cita</string>
+    <string name="text_view_request">Las peticiones web se realizarán utilizando el método HTTP seleccionado</string>
+</resources>
