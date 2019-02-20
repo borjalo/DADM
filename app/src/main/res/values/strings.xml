@@ -11,7 +11,7 @@
     <string name="about">About</string>
     
     <!-- About screen -->
-    <string name="info">Quotation Shake by\n\nBorja Alonso\n\nborjalonso95@gmail.com\n\n2019</string>
+    <string name="info" translatable="false">Quotation Shake by\n\nBorja Alonso\n\nborjalonso95@gmail.com\n\n2019</string>
     
     <!-- Settings screen -->
     <string name="text_view_name">Name that identifies the user</string>
@@ -28,4 +28,13 @@
     <string name="text_view_refresh">Hello %1s!\nPress Refresh to get a new quotation</string>
     <string name="quotation">This is a sample quotation</string>
     <string name="author">This is a sample author</string>
+
+    <!-- Languages -->
+    <string name="english">English</string>
+    <string name="russian">Russian</string>
+
+    <!-- Dialog -->
+    <string name="dialog_message">Are you sure you want to delete this quotation?</string>
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
 </resources>

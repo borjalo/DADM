@@ -15,7 +15,12 @@
     <string name="settings_bar">Ajustes</string>
     <string name="text_view_language">Las citas serán recibidas en el lenguaje seleccionado</string>
     <string name="text_view_name">Nombre que identifica al usuario</string>
-    <string name="info">Untranslatable</string>
     <string name="text_view_refresh">¡Hola %1s!\nPulsa Refrescar para obtener una nueva cita</string>
     <string name="text_view_request">Las peticiones web se realizarán utilizando el método HTTP seleccionado</string>
+    <string name="english">Inglés</string>
+    <string name="russian">Ruso</string>
+    <string name="dialog_message">¿Está seguro que desea eliminar esta cita?</string>
+    <string name="yes_button">Sí</string>
+    <string name="no_button">No</string>
+
 </resources>
