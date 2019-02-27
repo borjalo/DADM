@@ -12,27 +12,40 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".DashboardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.quotationshake.DashboardActivity" />
+        </activity>
+        <activity
             android:name=".QuotationActivity"
             android:label="@string/random"
             android:parentActivityName=".DashboardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.quotationshake.DashboardActivity" />
         </activity>
         <activity
             android:name=".FavouriteActivity"
             android:label="@string/fav_quotes"
             android:parentActivityName=".DashboardActivity">
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/settings_bar"
-            android:parentActivityName=".DashboardActivity"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.quotationshake.DashboardActivity" />
         </activity>
         <activity
             android:name=".AboutActivity"
             android:label="@string/about_bar"
             android:parentActivityName=".DashboardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.quotationshake.DashboardActivity" />
         </activity>
-        <activity android:name=".DashboardActivity">
+        <activity
+            android:name=".DashboardActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

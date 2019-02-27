@@ -13,6 +13,7 @@
 
         <Button
             android:id="@+id/getQuotationsButton"
+            android:background="@drawable/form_and_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -21,12 +22,14 @@
             android:layout_weight="1"
             android:onClick="launchActivity"
             android:text="@string/get"
+            android:textColor="@color/text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/favouriteQuotationsButton"
+            android:background="@drawable/form_and_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -34,6 +37,7 @@
             android:layout_weight="1"
             android:onClick="launchActivity"
             android:text="@string/fav"
+            android:textColor="@color/text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +45,7 @@
 
         <Button
             android:id="@+id/settingsButton"
+            android:background="@drawable/form_and_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -48,6 +53,7 @@
             android:layout_weight="1"
             android:onClick="launchActivity"
             android:text="@string/set"
+            android:textColor="@color/text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +61,7 @@
 
         <Button
             android:id="@+id/aboutButton"
+            android:background="@drawable/form_and_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -63,6 +70,7 @@
             android:layout_weight="1"
             android:onClick="launchActivity"
             android:text="@string/about"
+            android:textColor="@color/text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

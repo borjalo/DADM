@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="languages">
+    <array name="languages">
         <item>@string/english</item>
         <item>@string/russian</item>
-    </string-array>
+    </array>
+
+    <array name="languages2">
+        <item>@string/english</item>
+        <item>@string/russian</item>
+    </array>
+
+    <array name="http">
+        <item>@string/get_text</item>
+        <item>@string/post_text</item>
+    </array>
+
+    <array name="http2">
+        <item>@string/get_text</item>
+        <item>@string/post_text</item>
+    </array>
+
 </resources>

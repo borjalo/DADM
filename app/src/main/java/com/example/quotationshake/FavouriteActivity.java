@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -47,21 +49,20 @@ public class FavouriteActivity extends AppCompatActivity {
 
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, int i, long l) {
-                final AlertDialog.Builder confirmationDialog = new AlertDialog.Builder(FavouriteActivity.this);
+            public boolean onItemLongClick(final AdapterView<?> adapterView, final View view, final int i, long l) {
+                AlertDialog.Builder confirmationDialog = new AlertDialog.Builder(FavouriteActivity.this);
                 confirmationDialog.setMessage(R.string.dialog_message);
                 confirmationDialog.setPositiveButton(R.string.yes_button, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
+                    public void onClick(DialogInterface dialogInterface, int pos) {
+                        quotationArrayAdapter.remove(quotationArrayAdapter.getItem(i));
                     }
                 });
 
                 confirmationDialog.setNegativeButton(R.string.no_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Quotation quoteToDelete = (Quotation) adapterView.getItemAtPosition(i);
-                        quotationArrayAdapter.remove(quoteToDelete);
+                        dialogInterface.dismiss();
                     }
                 });
                 confirmationDialog.create().show();
@@ -89,5 +90,40 @@ public class FavouriteActivity extends AppCompatActivity {
         mockListQuotation.add(nullQuotation);
 
         return mockListQuotation;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menufavourites, menu);
+        if(quotationArrayAdapter.isEmpty()) menu.findItem(R.id.deleteAll).setVisible(false);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.deleteAll:
+                AlertDialog.Builder deleteDialog = new AlertDialog.Builder(FavouriteActivity.this);
+                deleteDialog.setMessage(R.string.clearalldialog);
+
+                deleteDialog.setPositiveButton(R.string.yes_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        quotationArrayAdapter.clear();
+                        supportInvalidateOptionsMenu();
+                    }
+                });
+
+                deleteDialog.setNegativeButton(R.string.no_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                deleteDialog.create().show();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Settings activity theme. -->
+    <style name="settings_theme">
+        <item name="android:textColor">
+            @color/colorPrimaryDark
+        </item>
+
+        <item name="android:textSize">
+            @dimen/def
+        </item>
+    </style>
+
 </resources>
