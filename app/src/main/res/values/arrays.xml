@@ -20,4 +20,14 @@
         <item>@string/post_text</item>
     </array>
 
+    <array name="database_access">
+        <item>@string/room</item>
+        <item>@string/sqliteopenhelper</item>
+    </array>
+
+    <array name="database_access2">
+        <item>@string/room</item>
+        <item>@string/sqliteopenhelper</item>
+    </array>
+
 </resources>

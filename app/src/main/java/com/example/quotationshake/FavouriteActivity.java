@@ -2,7 +2,9 @@ package com.example.quotationshake;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,21 +16,42 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import databases.QuotationDB;
+import databases.QuotationSQLiteOpenHelper;
 import middleware.Middleware;
 import quotes.Quotation;
+import tasks.FavouriteAsyncTask;
 
 public class FavouriteActivity extends AppCompatActivity {
 
     ListView lv;
     Middleware quotationArrayAdapter;
 
+    QuotationSQLiteOpenHelper helper = QuotationSQLiteOpenHelper.getInstance(this);
+    String databaseAccessMethod;
+    Quotation quotation;
+    List<Quotation> quotations;
+    boolean databaseMethodAsync;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        quotationArrayAdapter = new Middleware(this, R.layout.quotation_list_row, getMockQuotations());
+        databaseAccessMethod = preferences.getString("list_preference_database","Room");
+        quotations = new ArrayList<Quotation>();
+
+        /*switch (databaseAccessMethod) {
+            case "Room":
+                quotationArrayAdapter = new Middleware(this, R.layout.quotation_list_row, QuotationDB.getInstance(FavouriteActivity.this).quotationDAO().getAllQuotation());
+                break;
+            case "SQLiteOpenHelper":
+                quotationArrayAdapter = new Middleware(this, R.layout.quotation_list_row, helper.getQuotationsFromDatabase());
+                break;
+        }*/
 
         lv = findViewById(R.id.favouriteList);
         lv.setAdapter(quotationArrayAdapter);
@@ -55,7 +78,23 @@ public class FavouriteActivity extends AppCompatActivity {
                 confirmationDialog.setPositiveButton(R.string.yes_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int pos) {
-                        quotationArrayAdapter.remove(quotationArrayAdapter.getItem(i));
+                        quotation = (Quotation) quotationArrayAdapter.getItem(i);
+
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                switch (databaseAccessMethod){
+                                    case "Room":
+                                        QuotationDB.getInstance(FavouriteActivity.this).quotationDAO().deleteQuotation(quotation);
+                                        break;
+                                    case "SQLiteOpenHelper":
+                                        helper.deleteQuotationFromDatabase(quotation.getQuoteText());
+                                        break;
+                                }
+                            }
+                        }).start();
+
+                        quotationArrayAdapter.remove(quotation);
                     }
                 });
 
@@ -70,6 +109,21 @@ public class FavouriteActivity extends AppCompatActivity {
             }
         });
 
+        FavouriteAsyncTask favouriteAsyncTask = new FavouriteAsyncTask(this);
+        favouriteAsyncTask.execute(databaseMethodAsync);
+    }
+
+    public void fillAdapter(List<Quotation> quotations){
+        switch (databaseAccessMethod){
+            case "Room":
+                quotationArrayAdapter = new Middleware(this, R.layout.quotation_list_row, quotations);
+                break;
+            case "SQLiteOpenHelper":
+                quotationArrayAdapter = new Middleware(this, R.layout.quotation_list_row, quotations);
+                break;
+        }
+
+        lv.setAdapter(quotationArrayAdapter);
     }
 
     public void searchInfo(View v, String author) {
@@ -110,6 +164,22 @@ public class FavouriteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         quotationArrayAdapter.clear();
+
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                switch (databaseAccessMethod){
+                                    case "Room":
+                                        QuotationDB.getInstance(FavouriteActivity.this).quotationDAO().deleteAllQuotations();
+                                        break;
+                                    case "SQLiteOpenHelper":
+                                        helper.deleteAll();
+                                        break;
+                                }
+                            }
+                        }).start();
+
+
                         supportInvalidateOptionsMenu();
                     }
                 });

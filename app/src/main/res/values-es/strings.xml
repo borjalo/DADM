@@ -12,7 +12,6 @@
     <string name="random">Citas aleatorias</string>
     <string name="set">Ajustes</string>
     <string name="settings_bar">Ajustes</string>
-    <string name="text_view_language">Las citas serán recibidas en el lenguaje seleccionado</string>
     <string name="text_view_refresh">¡Hola %1s!\nPulsa Refrescar para obtener una nueva cita</string>
     <string name="english">Inglés</string>
     <string name="russian">Ruso</string>
@@ -23,12 +22,16 @@
     <string name="refresh">Refrescar</string>
     <string name="clearall">Borrar todo</string>
     <string name="clearalldialog">¿Estás seguro de que quieres borrar TODAS tus citas favoritas?</string>
-    <string name="language">Idioma</string>
     <string name="categoryweb">Servicio web</string>
     <string name="username">Nombre de usuario</string>
     <string name="usermane_hint">Nombre que identifica al usuario</string>
     <string name="database_preferences">Método de acceso</string>
     <string name="database_preferences_hint">La base de datos será accedida según el método seleccionado</string>
     <string name="title_activity_settings">Ajustes</string>
+    <string name="databases">Bases de datos</string>
+    <string name="language_summary">Las citas serán recibidas en el lenguaje seleccionado</string>
+    <string name="language_title">Idioma</string>
+    <string name="request_method_title">Método solicitud HTTP</string>
+    <string name="request_method_summary">"Las peticiones web serán realizadas con el método HTTP seleccionado "</string>
 
 </resources>

@@ -16,10 +16,12 @@
     <!-- Settings screen -->
     <string name="usermane_hint">Name that identifies the user</string>
     <string name="username">Username</string>
-    <string name="language">Language</string>
-    <string name="text_view_language">Quotations will be received in the selected language</string>
-    <string name="database_preferences">Database access method</string>
-    <string name="database_preferences_hint">Database will be accessed following the selected method</string>
+
+    <string name="categoryweb">Web Service</string>
+    <string name="language_title">Language</string>
+    <string name="language_summary">Quotations will be received in the selected language</string>
+    <string name="request_method_title">HTTP request method</string>
+    <string name="request_method_summary">Web requests will be performed using the selected HTTP method</string>
     <string name="get_text" translatable="false">GET</string>
     <string name="post_text" translatable="false">POST</string>
     <string name="english">English</string>
@@ -27,7 +29,11 @@
 
     <string name="default_username" translatable="false">Nameless One</string>
 
-    <string name="categoryweb">Web Service</string>
+    <string name="databases">Databases</string>
+    <string name="database_preferences">Database access method</string>
+    <string name="database_preferences_hint">Database will be accessed following the selected method</string>
+    <string name="room" translatable="false">Room</string>
+    <string name="sqliteopenhelper" translatable="false">SQLiteOpenHelper</string>
 
     <!-- Favourite quotations screen -->
     <string name="author_info_button">Author info</string>

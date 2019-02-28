@@ -15,14 +15,24 @@
             android:entries="@array/http"
             android:entryValues="@array/http2"
             android:key="list_access_method"
-            android:title="@string/database_preferences"
-            android:summary="@string/database_preferences_hint"/>
+            android:title="@string/request_method_title"
+            android:summary="@string/request_method_summary"/>
         <ListPreference
             android:defaultValue="@string/english"
             android:entries="@array/languages"
             android:entryValues="@array/languages2"
             android:key="list_languages"
-            android:title="@string/language"
-            android:summary="@string/text_view_language"/>
+            android:title="@string/language_title"
+            android:summary="@string/language_summary"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/databases">
+
+        <ListPreference
+            android:defaultValue="@string/room"
+            android:entries="@array/database_access"
+            android:entryValues="@array/database_access2"
+            android:key="list_preference_database"
+            android:title="@string/database_preferences"
+            android:summary="@string/database_preferences_hint" />
     </PreferenceCategory>
 </PreferenceScreen>
