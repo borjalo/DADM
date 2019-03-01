@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,6 +62,7 @@ public class FavouriteActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Quotation quote = (Quotation) adapterView.getItemAtPosition(i);
                 String author = quote.getQuoteAuthor();
+                Log.d("AUTHOR", author);
                 if (author == "" || author == null) {
                     Toast errorToast = Toast.makeText(FavouriteActivity.this, "Error al intentar obtener la información del autor", Toast.LENGTH_LONG);
                     errorToast.show();
@@ -95,6 +97,7 @@ public class FavouriteActivity extends AppCompatActivity {
                         }).start();
 
                         quotationArrayAdapter.remove(quotation);
+                        supportInvalidateOptionsMenu();
                     }
                 });
 

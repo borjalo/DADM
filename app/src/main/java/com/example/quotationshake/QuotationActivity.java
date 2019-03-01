@@ -1,6 +1,9 @@
 package com.example.quotationshake;
 
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +34,11 @@ public class QuotationActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
 
+    Handler handler;
+    String language;
+    String httpMethod;
+    QuotationAsyncTask asyncTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +50,8 @@ public class QuotationActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+        handler = new Handler();
+
         if (savedInstanceState == null) {
             username = preferences.getString("name", "Nameless One");
             databaseAccessMethod = preferences.getString("list_preference_database", "");
@@ -49,12 +59,14 @@ public class QuotationActivity extends AppCompatActivity {
             String user = tv_quote.getText().toString();
             String newUser = user.replace("%1s", username);
             tv_quote.setText(newUser);
+            language = preferences.getString("list_languages", getResources().getString(R.string.english));
+            httpMethod = preferences.getString("list_access_method", "GET");
         } else {
             tv_quote.setText(savedInstanceState.getString("tv_quote"));
             tv_author.setText(savedInstanceState.getString("tv_author"));
 
             databaseAccessMethod = savedInstanceState.getString("list_preference_database");
-            Log.d("1. method", databaseAccessMethod);
+            language = savedInstanceState.getString("list_languages");
         }
 
 
@@ -83,14 +95,33 @@ public class QuotationActivity extends AppCompatActivity {
     }
 
     public void refresh() {
-        QuotationAsyncTask asyncTask = new QuotationAsyncTask(QuotationActivity.this);
-        asyncTask.execute();
-        /*tv_quote.setText(getResources().getString(R.string.quotation).replace("%1$d", " " + quantityOfQuotes));
-        tv_author.setText(getResources().getString(R.string.author).replace("%1$d", " " + quantityOfQuotes));*/
+        asyncTask = new QuotationAsyncTask(QuotationActivity.this);
+        String [] strings = {language, httpMethod};
+        asyncTask.execute(strings);
 
         m.findItem(R.id.favquote).setVisible(true);
+        if (connectionAvailable()) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    switch (databaseAccessMethod) {
+                        case "Room":
+                            visible = QuotationDB.getInstance(QuotationActivity.this).quotationDAO().getQuotation(tv_quote.getText().toString()) == null;
+                            break;
+                        case "SQLiteOpenHelper":
+                            visible = !helper.isInDatabase(tv_quote.getText().toString());
+                            break;
+                    }
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            m.findItem(R.id.favquote).setVisible(visible);
+                        }
+                    });
+                }
 
-
+            }).start();
+        }
     }
 
     public void favQuotation(MenuItem item) {
@@ -102,7 +133,10 @@ public class QuotationActivity extends AppCompatActivity {
             public void run() {
                 switch (databaseAccessMethod){
                     case "Room":
-                        QuotationDB.getInstance(QuotationActivity.this).quotationDAO().addQuotation(quotation);
+                        if (!helper.isInDatabase(tv_quote.getText().toString())){
+                            QuotationDB.getInstance(QuotationActivity.this).quotationDAO().addQuotation(quotation);
+                        }
+
                         break;
                     case "SQLiteOpenHelper":
                         helper.addQuotationToDatabase(quotation);
@@ -145,19 +179,23 @@ public class QuotationActivity extends AppCompatActivity {
                 }
             }
         }).start();
-
-
     }
 
-    /*@Override
+    public boolean connectionAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return ((networkInfo != null) && (networkInfo.isConnected()));
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
+
         savedInstanceState.putString("tv_quote", tv_quote.getText().toString());
         savedInstanceState.putString("tv_author", tv_author.getText().toString());
-        savedInstanceState.putInt("quantity", quantityOfQuotes);
-        savedInstanceState.putBoolean("visible",visible);
-
+        savedInstanceState.putBoolean("visible", visible);
         savedInstanceState.putString("list_preference_database", databaseAccessMethod);
+        savedInstanceState.putString("list_preference_languages", language);
 
-    }*/
+    }
 }
